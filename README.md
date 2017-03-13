@@ -6,6 +6,11 @@ Full stack Apollo and PassportJS integration, inspired by Meteor Accounts.
 
 Copyright (c) 2017 by Gilad Shoham & Gadi Cohen, released under the MIT license.
 
+## IMPORTANT NOTICE
+This package is named apollo-passportjs (instead of apollo-passport) in the npm.
+I did this in order to be able to release it to npm.
+The original author is not responding so i can't use the original name.
+
 ## IMPORTANT NOTICE (DEPRECATION)
 This fork is maintained by Gilad Shoham.
 
@@ -48,7 +53,7 @@ Lastly, this is my first time using passport, apollo/graphql and JWT, so PRs for
 
 **Bugs, feature requests, etc**
 
-Top priority will be given to high quality PRs.  You can still help by reporting bugs, requesting features, etc, as long as you have realistic expectations :)  Consideration will be given to the number of users affected: See [open issues sorted by thumbs-up](https://github.com/apollo-passport/apollo-passport/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc).
+Top priority will be given to high quality PRs.  You can still help by reporting bugs, requesting features, etc, as long as you have realistic expectations :)  Consideration will be given to the number of users affected: See [open issues sorted by thumbs-up](https://github.com/GiladShoham/apollo-passport/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc).
 
 ## Getting Started
 
@@ -77,7 +82,7 @@ $ npm i --save passport-facebook
 Note: the server side requires a `ROOT_URL` to be set.  This can be done via 1) environment variable, 2) a global / define, or 3) by passing a ROOT_URL option to `new ApolloPassport(options)`.
 
 ```js
-import ApolloPassport from 'apollo-passport';
+import ApolloPassport from 'apollo-passportjs';
 import MongoDriver from 'apollo-passport-mongodb-driver';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
@@ -130,9 +135,9 @@ app.use('/ap-auth', apolloPassport.expressMiddleware());
 ```js
 // Configure Apollo
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
-import ApolloPassport from 'apollo-passport/lib/client';
+import ApolloPassport from 'apollo-passportjs/lib/client';
 import ApolloPassportLocal from 'apollo-passport-local/lib/client';
-import apMiddleware from 'apollo-passport/lib/client/middleware';
+import apMiddleware from 'apollo-passportjs/lib/client/middleware';
 
 const networkInterface = createNetworkInterface('/graphql');
 networkInterface.use([ apMiddleware ]);
@@ -182,7 +187,7 @@ See [apollo-passport-react](https://www.npmjs.com/package/apollo-passport-react)
 * During client load, a GraphQL query is sent to the server.  Consider enabling **query batching**.
 * As mentioned above, a `ROOT_URL` is required.  It's used to auto-generate the callbackUrl if none is specific.  By default, http://www.blah.com/ap-auth/facebook/callback (Meteor-style guided setup coming soon).
 
-[Let us know](https://github.com/apollo-passport/apollo-passport/issues/new) of any gotchas you come across so we can document them.
+[Let us know](https://github.com/GiladShoham/apollo-passport/issues/new) of any gotchas you come across so we can document them.
 
 ## API
 
