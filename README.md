@@ -4,12 +4,12 @@ Full stack Apollo and PassportJS integration, inspired by Meteor Accounts.
 
 [![npm](https://img.shields.io/npm/v/apollo-passport.svg?maxAge=2592000)](https://www.npmjs.com/package/apollo-passport) [![Circle CI](https://circleci.com/gh/apollo-passport/apollo-passport.svg?style=shield)](https://circleci.com/gh/apollo-passport/apollo-passport) [![Coverage Status](https://coveralls.io/repos/github/apollo-passport/apollo-passport/badge.svg?branch=master)](https://coveralls.io/github/apollo-passport/apollo-passport?branch=master) ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-Copyright (c) 2016 by Gadi Cohen, released under the MIT license.
+Copyright (c) 2017 by Gilad Shoham & Gadi Cohen, released under the MIT license.
 
 ## IMPORTANT NOTICE (DEPRECATION)
+This fork is maintained by Gilad Shoham.
 
-No further work is being done on this project.  We are busy merging with
-`apollo-accounts` into the new
+I will make small fixes to this fork but main work will be done under
 [`js-accounts`](https://github.com/js-accounts/accounts) framework.
 
 You can still use `apollo-passport` if you need something in the meantime,
@@ -25,6 +25,18 @@ but all future work continues in `js-accounts`.
   * Great for SPAs (single page apps) - no reloading or redirects to login; visible progress hints in UI.
   * Re-uses your existing transports.
   * No need for cookies and a cookie-free domain.
+
+
+## New Features in this fork (Highlights)
+  * Add option to define input apUserInput (outside) for creating new users with your desired fields
+  * Add account verification token during create user
+  * Add apVerifyAccount mutation to verify the account
+  * Add recoverPasswordRequest mutation to create reset password token
+  * Add options to pass hooks method (onCreateUserEnd, onBeforeStoreRegisteredUser, onRecoverPasswordRequestEnd, onVerifyAccountEnd, onRecoverPasswordEnd, onLoginEnd) (for example to send verification emails)
+  * Improve errors format (Add error code)
+  * Allow users without services to register even if their email already exist (Merge with existing user) for case that the user added from outside and not really registered
+  # Align user schema (email field) with passport recommended structure from [here](http://passportjs.org/docs/profile)
+  # Add register date during merge with existing user
 
 ## In Development
 
@@ -51,9 +63,9 @@ The example below shows the most common options, and may be customized with:
 
 ```sh
 # Typical packages.  Choose database, strategies, ui from the list above.
-$ npm i --save apollo-passport \
-  apollo-passport-local \
-  apollo-passport-rethinkdbdash \
+$ npm i --save apollo-passportjs \
+  apollo-passport-local-strategy \
+  apollo-passport-mongodb-driver \
   apollo-passport-react
 
 # Other passport strategies (that don't have "augmented" apollo versions)
@@ -66,12 +78,15 @@ Note: the server side requires a `ROOT_URL` to be set.  This can be done via 1) 
 
 ```js
 import ApolloPassport from 'apollo-passport';
-import RethinkDBDashDriver from 'apollo-passport-rethinkdbdash';
+import MongoDriver from 'apollo-passport-mongodb-driver';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 
+// However you usually create your mongodb instance
+const m = await MongoClient.connect(`mongodb://${host}:${port}/${name}`);
+
 const apolloPassport = new ApolloPassport({
-  db: new RethinkDBDashDriver(r),  // "r" is your rethinkdbdash instance
+  db: new MongoDriver(m),          // "m" is your mongodb instance
   jwtSecret: 'my special secret'   // will be optional/automatic in the future
   authPath: '/ap-auth'             // default: '/ap-auth', changing untested
 });
