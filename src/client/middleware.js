@@ -4,7 +4,7 @@
  */
 
 export default {
-  applyMiddleware(req, next) {
+  applyBatchMiddleware(req, next) {
     const token = localStorage.getItem('apToken');
 
     if (!token)
