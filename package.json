@@ -1,6 +1,6 @@
 {
-  "name": "apollo-passport",
-  "version": "0.0.7",
+  "name": "apollo-passportjs",
+  "version": "0.0.8",
   "description": "Apollo authentication via PassportJS and JWTs, with UI",
   "main": "lib/index.js",
   "scripts": {
@@ -13,10 +13,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/apollo-passport/apollo-passport"
+    "url": "https://github.com/GiladShoham/apollo-passport"
   },
   "bugs": {
-    "url": "https://github.com/apollo-passport/apollo-passport/issues"
+    "url": "https://github.com/GiladShoham/apollo-passport/issues"
   },
   "keywords": [
     "apollo",
@@ -24,7 +24,7 @@
     "auth",
     "authentication"
   ],
-  "author": "Gadi Cohen",
+  "author": "Gilad Shoham",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.7.5",
