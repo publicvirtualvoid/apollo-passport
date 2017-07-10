@@ -92,7 +92,7 @@ const m = await MongoClient.connect(`mongodb://${host}:${port}/${name}`);
 
 const apolloPassport = new ApolloPassport({
   db: new MongoDriver(m),          // "m" is your mongodb instance
-  jwtSecret: 'my special secret'   // will be optional/automatic in the future
+  jwtSecret: 'my special secret',   // will be optional/automatic in the future
   authPath: '/ap-auth'             // default: '/ap-auth', changing untested
 });
 
@@ -120,7 +120,7 @@ apolloPassport.use('oauth2:facebook', FacebookStrategy, {
 // Merge these into your Apollo config however you usually do...
 const apolloOptions = {
   schema: apolloPassport.schema(),
-  resolvers: apolloPassport.resolvers();
+  resolvers: apolloPassport.resolvers()
 };
 
 // Augment apolloServer's entry point
